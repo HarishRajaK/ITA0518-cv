@@ -1,0 +1,32 @@
+import cv2
+import matplotlib.pyplot as plt
+
+def analyze_histogram(image_path):
+    # Read the image
+    image = cv2.imread(image_path)
+
+    # Split the image into its color channels
+    channels = cv2.split(image)
+
+    # Set the histogram parameters
+    histSize = 256
+    histRange = (0, 256)
+    colors = ['b', 'g', 'r']
+
+    # Plot histograms for each color channel
+    plt.figure(figsize=(10, 5))
+    for i, color in enumerate(colors):
+        hist = cv2.calcHist([channels[i]], [0], None, [histSize], histRange)
+        plt.plot(hist, color=color)
+        plt.xlim([0, histSize])
+
+    plt.title('Histogram of Color Levels')
+    plt.xlabel('Pixel Value')
+    plt.ylabel('Frequency')
+    plt.legend(['Blue', 'Green', 'Red'])
+    plt.grid(True)
+    plt.show()
+
+# Example usage:
+image_path = 'C:/Users/haris/OneDrive/Pictures/Saved Pictures/wallpaper o/wp6495734.jpg'
+analyze_histogram(image_path)
