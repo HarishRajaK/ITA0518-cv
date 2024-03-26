@@ -1,0 +1,63 @@
+import cv2
+# Function to play video in normal speed
+def play_normal_speed(video_path):
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print("Error: Could not open video")
+        return
+    
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        cv2.imshow('Normal Speed', frame)
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+# Function to play video in slow motion
+def play_slow_motion(video_path, slow_factor):
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print("Error: Could not open video")
+        return
+    
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        cv2.imshow('Slow Motion', frame)
+        if cv2.waitKey(25 * slow_factor) & 0xFF == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+# Function to play video in fast motion
+def play_fast_motion(video_path, fast_factor):
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print("Error: Could not open video")
+        return
+    
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        cv2.imshow('Fast Motion', frame)
+        if cv2.waitKey(25 // fast_factor) & 0xFF == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
+
+# Path to the captured video
+video_path = "C:/Users/haris/OneDrive/Pictures/Camera Roll/WIN_20240326_12_35_17_Pro.mp4"
+
+# Play video in normal speed
+play_normal_speed(video_path)
+
+# Play video in slow motion (factor of 2)
+play_slow_motion(video_path, slow_factor=2)
+
+# Play video in fast motion (factor of 2)
+play_fast_motion(video_path, fast_factor=2)
