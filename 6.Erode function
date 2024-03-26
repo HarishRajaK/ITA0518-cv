@@ -1,0 +1,28 @@
+import cv2
+import numpy as np
+
+# Read the image
+image = cv2.imread("C:/Users/haris/OneDrive/Pictures/Saved Pictures/wallpaper o/wp6495734.jpg")
+
+# Check if image has been successfully read
+if image is None:
+    print("Error: Image not read")
+else:
+    # Convert image to grayscale
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Apply thresholding (optional)
+    _, binary_image = cv2.threshold(gray_image, 127, 255, cv2.THRESH_BINARY)
+
+    # Define kernel for erosion
+    kernel = np.ones((5,5), np.uint8)
+
+    # Apply erosion
+    eroded_image = cv2.erode(binary_image, kernel, iterations=1)
+
+    # Display the original and eroded images
+    cv2.imshow('Original Image', binary_image)
+    cv2.imshow('Eroded Image', eroded_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
